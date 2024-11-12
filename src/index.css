@@ -1,0 +1,143 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+/* Base styles for all buttons */
+button {
+  margin: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Create Button */
+button.create {
+  background-color: #4CAF50;   /* Green */
+  color: white;
+}
+
+button.create:hover {
+  background-color: #45a049;   /* Darker Green */
+}
+
+/* Edit Button */
+button.edit {
+  background-color: #ffa500;   /* Orange */
+  color: white;
+}
+
+button.edit:hover {
+  background-color: #e68900;   /* Darker Orange */
+}
+
+/* Delete Button */
+button.delete {
+  background-color: #f44336;   /* Red */
+  color: white;
+}
+
+button.delete:hover {
+  background-color: #da190b;   /* Darker Red */
+}
+
+/* Disabled button style */
+button:disabled {
+  background-color: #d3d3d3;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+/* General form styling */
+form {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Label Styling */
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Input Field Styling */
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box; /* To include padding and border in width */
+  transition: border-color 0.3s ease;
+}
+
+/* Focus Effect for Inputs */
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: #007bff; /* Blue border on focus */
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.4); /* Subtle blue glow */
+}
+
+/* Icon inside input field */
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper i {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+}
+
+/* Padding adjustment for inputs with icons */
+.input-wrapper input {
+  padding-left: 30px; /* Space for the icon */
+}
+
+/* Submit Button Styling */
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+button[type="submit"]:focus {
+  outline: none;
+}
