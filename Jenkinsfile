@@ -4,12 +4,13 @@ pipeline {
     environment {
         DOCKER_REGISTRY = 'haunt14'  // Your Docker registry (without https://)
         DOCKER_IMAGE_NAME_REACT = 'jenkin-docker-nodejs-frontend'  // Your Docker image name
-        DOCKER_IMAGE_NAME_NGINX = 'jenkin-docker-nginx-proxy'  // Your Docker image name
+        DOCKER_IMAGE_NAME_JAVA = 'jenkin-docker-java-backend'  // Your Docker image name
         DOCKER_CREDENTIALS = '0385934297'  // Jenkins credentials ID for Docker login
     }
 
     parameters {
-        string(name: 'AGENT_LABEL', defaultValue: 'nodejs-agent', description: 'The label of the Jenkins agent to use')
+        string(name: 'AGENT_JS_LABEL', defaultValue: 'nodejs-agent', description: 'The label of the Jenkins agent to use')
+        string(name: 'AGENT_JV_LABEL', defaultValue: 'java-agent', description: 'The label of the Jenkins agent to use')
     }
 
     stages {
@@ -18,20 +19,26 @@ pipeline {
             steps {
                 // Checkout the code from the Git repository
                 sh 'echo test github webhook 4'
-                checkout scm
+                sh 'mkdir -p /home/java-git && cd /home/java-git && git clone https://github.com/HauNT1409021997/backend-spring.git'
+                sh 'mkdir -p /home/javascript-git && cd /home/javascript-git && git clone https://github.com/HauNT1409021997/frontend-react.git'
                 sh 'sudo gpasswd -a jenkins docker'
                 sh 'sudo usermod -aG docker jenkins'
             }
         }
 
         stage('Get Commit ID') {
-            agent { label "${params.AGENT_LABEL}" }  // Dynamically select agent based on parameter
-            steps {
-                script {
-                    // Get the commit ID using `git log --oneline` (first 7 characters of the hash)
-                    env.GIT_COMMIT_ID = sh(script: 'git log --oneline -n 1 | awk \'{print $1}\'', returnStdout: true).trim()
-                    echo "Commit ID: ${env.GIT_COMMIT_ID}"
+            parallel{
+                stage('Get Commit ID of BE') {
+                    agent { label "${params.AGENT_LABEL}" }  // Dynamically select agent based on parameter
+                    steps {
+                        script {
+                            // Get the commit ID using `git log --oneline` (first 7 characters of the hash)
+                            env.GIT_COMMIT_ID = sh(script: 'git log --oneline -n 1 | awk \'{print $1}\'', returnStdout: true).trim()
+                            echo "Commit ID: ${env.GIT_COMMIT_ID}"
+                        }
+                    }
                 }
+
             }
         }
 
