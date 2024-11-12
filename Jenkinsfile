@@ -18,7 +18,7 @@ pipeline {
             steps {
                 // Checkout the code from the Git repository
                 sh 'echo test github webhook 4'
-                sh 'git checkout master'
+                checkout scm
                 sh 'sudo gpasswd -a jenkins docker'
                 sh 'sudo usermod -aG docker jenkins'
             }
