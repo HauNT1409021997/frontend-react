@@ -17,7 +17,7 @@ pipeline {
             agent { label "${params.AGENT_LABEL}" }  // Dynamically select agent based on parameter
             steps {
                 // Checkout the code from the Git repository
-                sh 'echo test github webhook 4'
+                sh 'echo test github webhook 5'
                 sh 'git checkout master'
                 sh 'sudo gpasswd -a jenkins docker'
                 sh 'sudo usermod -aG docker jenkins'
