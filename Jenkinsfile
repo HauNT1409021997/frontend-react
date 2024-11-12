@@ -9,7 +9,7 @@ pipeline {
     }
 
     parameters {
-        string(name: 'AGENT_LABEL', defaultValue: 'swarm java-agent', description: 'The label of the Jenkins agent to use')
+        string(name: 'AGENT_LABEL', defaultValue: 'nodejs-agent', description: 'The label of the Jenkins agent to use')
     }
 
     stages {
