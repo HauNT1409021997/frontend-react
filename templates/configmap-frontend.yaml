@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.frontend.configMap.name }}-{{ .Release.Name }}
+  namespace: {{ .Values.frontend.metadata.namespace }}
+data:
+  APP_ENV: "local"
+  APP_NAME: "frontend-app"
+  BACKEND_URL: '{{ .Values.frontend.serverInfo.protocol | default "http" }}://{{ .Values.frontend.serverInfo.hostName | default "localhost" }}:{{ .Values.frontend.serverInfo.exposedPort  | default "8080"}}/{{ .Values.frontend.serverInfo.path | default "api/info/users" }}'

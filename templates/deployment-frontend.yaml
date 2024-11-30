@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.frontend.labels.deploymentLabel }}
+  namespace: {{ .Values.frontend.metadata.namespace }}
+spec:
+  replicas: {{ .Values.frontend.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.frontend.labels.appLabel }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.frontend.labels.appLabel }}
+    spec:
+      containers:
+        - name: {{ .Values.frontend.image.name }}
+          image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.frontend.containerPort }}
+          env:
+            - name: REACT_APP_BACKEND_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.frontend.configMap.name }}-{{ .Release.Name }}
+                  key: BACKEND_URL

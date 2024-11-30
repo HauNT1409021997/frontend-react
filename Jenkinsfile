@@ -54,15 +54,12 @@ pipeline {
                 script {
                     // Build the Docker image using the commit ID as the tag
                     def customImageReact = docker.build("${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME_REACT}:${env.GIT_COMMIT_ID}")
-                    def customImageNginx = docker.build("${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME_NGINX}:${env.GIT_COMMIT_ID}")
                     docker.withRegistry('https://index.docker.io/v1/', "${DOCKER_CREDENTIALS}") {
                         // This block will run within the context of the login to the Docker registry
                         echo 'Successfully logged in to Docker registry'
 
                         // Push both the commit ID and "latest" tagged images
                         customImageReact.push("${env.GIT_COMMIT_ID}")  // Push commit ID tagged image
-
-                        customImageNginx.push("${env.GIT_COMMIT_ID}")  // Push commit ID tagged image
                     }
                 }
             }

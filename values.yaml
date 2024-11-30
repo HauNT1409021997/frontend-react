@@ -1,0 +1,23 @@
+frontend:
+  metadata:
+    namespace: homework-week4
+  image:
+    name: frontend
+    repository: haunt14/jenkin-docker-nodejs-frontend
+    tag: "20241124"
+  replicas: 1
+  service:
+    type: LoadBalancer
+    port: 3000
+  labels:
+    deploymentLabel: frontend-deployment
+    serviceLabel: frontend-service
+    appLabel: frontend
+  configMap:
+    name: configmap-frontend
+  containerPort: 3000
+  serverInfo:
+    protocol: "http"
+    hostName: "backend-service"
+    path: "api/info/users"
+    exposedPort: 8080

@@ -3,7 +3,9 @@
 import axios from 'axios';
 import {UserModel} from "../model/UserModel.ts";
 
-const API_URL = 'http://localhost:8080/api/info/users'; // Replace with your actual API endpoint
+const API_URL = process['env']['REACT_APP_BACKEND_ENDPOINT']; // Replace with your actual API endpoint
+
+console.log("API_URL", API_URL)
 
 // Get all users
 export const getUsers = async () => {
